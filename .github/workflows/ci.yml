@@ -1,0 +1,26 @@
+name: Build and test
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: swift --version
+      - name: Test battery parsing, estimates, alerts, and persistence
+        run: ./test.sh
+      - name: Build and sign local app bundle
+        run: ./build.sh
+      - name: Verify app bundle
+        run: codesign --verify --strict --verbose=2 build/BatteryScope.app
+      - name: Upload development app
+        uses: actions/upload-artifact@v4
+        with:
+          name: BatteryScope-development
+          path: build/BatteryScope.app

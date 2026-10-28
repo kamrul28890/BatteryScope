@@ -1,0 +1,22 @@
+# Swift package and generated app artifacts
+.build/
+.swiftpm/
+build/
+dist/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Local investigation material: never distribute third-party binaries,
+# decompilation, private readings, or toolchains with this project.
+.local/
+Tools/
+Reference/
+Analysis/
+
+# Local configuration and operating-system files
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
